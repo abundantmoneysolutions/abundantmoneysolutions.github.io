@@ -1,25 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <iframe width="100%" height="450px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=koyambedu,chennai&zoom=14&key=AIzaSyB0MY76SOV79MCuyV1SGLLsHghkvRvJPIQ" allowfullscreen></iframe>
-  </body>
+<head>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=ABQIAAAA637Mus9i198xaCP6kyeT0RQx_VuEwDbQw2tT4lOIPXcH-8yh-RShip_gsIHcjuA8B3qb__racWinFg&sensor=true">
+    </script>
+ <script type="text/javascript">
+  //Variable for holding map object
+  var map;
+
+  //Variable for holding marker object
+  var marker;
+
+  //Variable for infowindow map object
+  var infowindow;
+  
+  jQuery(document).ready(function(){
+   /*Map initialization*/
+   function initialize() {
+
+    //Create a location object with latitude and longitudes
+    var delhi = new google.maps.LatLng(28.635308, 77.22496);
+
+    //Create options for the map object
+    var myOptions = {
+     zoom:10,
+     mapTypeId: google.maps.MapTypeId.ROADMAP,
+     center: delhi
+    }
+
+    //Create our map
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    
+    createMarker(map, delhi);//Call function for creating our marker
+    customText = '<div id="infoWindow">Welcome to <b>New Delhi</b>.<br /><a href="http://webspeaks.in/" target="_blank">Webspeaks.in</a> provides excellent tutorials on Jquery, JavaScript, PHP, CSS, Magento, WordPress, Facebook API, Twitter API, PHP security tips.</div>';
+    createInfoWindow(map, marker, customText);//Call function for creating our infowindow
+   }
+
+   /*Function for creating the custom marker*/
+   function createMarker(map, centerLoc){
+    var image = new google.maps.MarkerImage(
+     'http://www.webspeaks.in/favicon.ico',
+     new google.maps.Size(40,35),
+     new google.maps.Point(0,0),
+     new google.maps.Point(0,35)
+    );
+    marker = new google.maps.Marker({
+     position: centerLoc,
+     map: map,
+     icon: image,
+     title:"Click here for more info."
+    });
+   }
+   
+   /*Function for creating the custom infoWindow*/
+   function createInfoWindow(map, marker, customText){
+    infowindow = new google.maps.InfoWindow({
+     content: customText
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+   }
+
+   jQuery('#mumbai').click(function(){
+    var Mumbai = new google.maps.LatLng(19.0759837, 72.8776559);
+    map.setCenter(Mumbai);
+    createMarker(map, Mumbai);
+    customText = '<div id="infoWindow"><b>Welcome to Mumbai</b>.<br /><a href="http://webspeaks.in/" target="_blank">Webspeaks.in</a> provides excellent tutorials on Jquery, JavaScript, PHP, CSS, Magento, WordPress, Facebook API, Twitter API, PHP security tips.</div>';
+    createInfoWindow(map, marker, customText);
+   });
+
+   jQuery('#new-york').click(function(){
+    var newyork = new google.maps.LatLng(40.77, 73.90);
+    map.setCenter(newyork);
+    createMarker(map, newyork);
+    customText = '<div id="infoWindow"><b>Welcome to New York</b>.<br /><a href="http://webspeaks.in/" target="_blank">Webspeaks.in</a> provides excellent tutorials on Jquery, JavaScript, PHP, CSS, Magento, WordPress, Facebook API, Twitter API, PHP security tips.</div>';
+    createInfoWindow(map, marker, customText);
+   });
+
+   initialize();
+  });
+ </script>
+</head>
+<body>
+ <div class="googlemap">
+  <div id="map_canvas"></div>
+  <div class="text">
+   <a id="mumbai" href="javascript:;">Go to Mumbai</a><br />
+   <a id="new-york" href="javascript:;">Go to New York</a><br />
+  </div>
+ </div>
+</body>
 </html>
