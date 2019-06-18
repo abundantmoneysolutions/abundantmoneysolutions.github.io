@@ -1,1 +1,54 @@
-sfeeerg
+<!DOCTYPE html>
+<html>
+   <head>
+      <script type="text/javascript" src="https://www.google.com/maps/embed/v1/place?q=koyambedu,chennai&zoom=14&key=AIzaSyB0MY76SOV79MCuyV1SGLLsHghkvRvJPIQ"></script>
+      <script type="text/javascript">
+         var origin = "arumbakam, chennai",
+             destination = "tnagar, chennai",
+             service = new google.maps.DistanceMatrixService();
+         
+         service.getDistanceMatrix(
+             {
+                 origins: [origin],
+                 destinations: [destination],
+                 travelMode: google.maps.TravelMode.DRIVING,
+                 avoidHighways: false,
+                 avoidTolls: false
+             }, 
+             callback
+         );
+         
+         function callback(response, status) {
+             var orig = document.getElementById("orig"),
+                 dest = document.getElementById("dest"),
+                 dist = document.getElementById("dist");
+         
+             if(status=="OK") {
+                 dest.value = response.destinationAddresses[0];
+                 orig.value = response.originAddresses[0];
+                 dist.value = response.rows[0].elements[0].distance.text;
+             } else {
+                 alert("Error: " + status);
+             }
+         }
+      </script>
+   </head>
+   <body>
+      <br>
+      Very simple HTML sample for using the Google Distance Matrix API.<br><br>
+      <table border="0">
+         <tr>
+            <td>Origin</td>
+            <td><input id="orig" type="text" style="width:35em"></td>
+         </tr>
+         <tr>
+            <td>Destination</td>
+            <td><input id="dest" type="text" style="width:35em"></td>
+         </tr>
+         <tr>
+            <td>Distance</td>
+            <td><input id="dist" type="text" style="width:35em"></td>
+         </tr>
+      </table>
+   </body>
+</html>
