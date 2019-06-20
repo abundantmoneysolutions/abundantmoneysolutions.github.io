@@ -230,7 +230,13 @@ getDevices();
         <h1 class="title">Ionic Blank Starter</h1>
       </ion-header-bar>
       <ion-content>
-                <div id="div_device" class="panel panel-default">
+<div class="row">
+  <div class="col col-50">One</div>
+  <div class="col col-50">Two</div>
+</div>
+        
+        
+        <div id="div_device" class="panel panel-default">
 <div class="select">
 <label for="audioSource">Audio source: </label><select id="audioSource"></select>
 </div>
@@ -239,6 +245,8 @@ getDevices();
 </div>
 </div>
 
+        
+        
 <div id="div_join" class="panel panel-default">
 <div class="panel-body">
 App ID: <input id="key" type="text" placeholder="Enter App ID" value="" size="36"></input>
