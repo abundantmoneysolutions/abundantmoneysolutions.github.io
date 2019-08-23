@@ -62,8 +62,8 @@ var deliveryarea = address[address.length - 5].long_name;
 var street = address[address.length - 3].long_name;
 var street1 = ',';
   var     street2 =address[address.length - 6].long_name;
-            var location1=deliveryarea.contact(street1);
-                        var location2=street2.contact(location1);
+            var location1=deliveryarea.concat(street1);
+                        var location2=street2.concat(location1);
 alert(location2);
 
 
