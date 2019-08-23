@@ -59,7 +59,7 @@ var b = a.slice(0); //Creates a new array
 
 var address = results[0].address_components;
 var deliveryarea = address[address.length - 5].long_name;
-var street = address[address.length - 4].long_name;
+var street = address[address.length - 3].long_name;
 
 alert(street);
 
