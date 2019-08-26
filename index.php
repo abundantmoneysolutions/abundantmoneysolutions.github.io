@@ -1,6 +1,6 @@
 <?php
 // Get the PHP helper library from twilio.com/docs/php/install
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/twilio-php-master/Twilio/autoload.php';
 use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 
